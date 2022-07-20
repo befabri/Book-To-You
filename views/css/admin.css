@@ -1,0 +1,61 @@
+.admin-container {
+	display:flex;
+	flex-wrap: wrap;
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+.admin-title {
+	margin-left: 5%;
+	margin-bottom: 4%;
+}
+
+.admin-table {
+	overflow-x:auto;
+}
+
+.admin-container td, .admin-container th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+.admin-container th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+}
+
+.admin-container h2 {
+	font-size: 17px;
+	text-align: right;
+	margin:auto auto;
+	margin-right: 4%;
+	min-width: 20ch;
+}
+
+.admin-container tr:nth-child(even){
+	background-color: rgb(248, 248, 248);
+}
+  
+.admin-container tr:hover {
+	background-color: var(--color-button);
+}
+
+@media(max-width: 1300px) {
+	.admin-title, .admin-container h2 {
+		text-align: center;
+	}	
+	.admin-title {
+		margin: 0;
+		margin-bottom: 3%;
+	}	
+	.admin-container {
+		justify-content: center;
+	}
+}
+
+@media(max-width: 1020px) {
+	.admin-container h2 {
+		margin: 0;
+		margin-bottom: 3%;
+	}
+}
