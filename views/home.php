@@ -22,9 +22,14 @@
 	<?php include 'aside.php';?>
 	<div id="ideas-grid">
 	<?php foreach ($ideas as $idea) { ?>
-			<div class="idea-card">
-				<article class="content">
-					<p class="status"><?php echo STATUS[$idea->html_status()]?></p>
+			<div class="card">
+				<article class="card__content">
+						<p class="card__status" data-tooltip="<?php echo $idea->html_date_submitted()?>">
+							<?php echo STATUS[$idea->html_status()]?>
+						</p>
+						<div class="card__tooltip">
+							
+						</div>
 					<h2><a href="index.php?action=idea&id=<?php echo $idea->html_id_idea()?>"><?php echo $idea->html_title()?></a></h2>
 					<p>
 						<?php 
@@ -40,9 +45,9 @@
 						?>
 					</p>
 				</article>
-				<div class="info">
-					<a href="index.php?action=idea&id=<?php echo $idea->html_id_idea()?>"><h2><?php echo $idea->html_votes_count()?></h2> <p class="small"><?php echo ($idea->html_votes_count()>1) ? 'votes' : 'vote'?></p></a>
-					<a href="index.php?action=idea&id=<?php echo $idea->html_id_idea()?>#comment"><h2><?php echo $idea->html_comments_count()?></h2> <p class="small"><?php echo ($idea->html_comments_count()>1) ? 'commentaires' : 'commentaire'?></p></a>
+				<div class="card__info">
+					<a href="index.php?action=idea&id=<?php echo $idea->html_id_idea()?>"><h2><?php echo $idea->html_votes_count()?></h2> <p class="card__info--small"><?php echo ($idea->html_votes_count()>1) ? 'votes' : 'vote'?></p></a>
+					<a href="index.php?action=idea&id=<?php echo $idea->html_id_idea()?>#comment"><h2><?php echo $idea->html_comments_count()?></h2> <p class="card__info--small"><?php echo ($idea->html_comments_count()>1) ? 'commentaires' : 'commentaire'?></p></a>
 				</div>
 				<a class="button vote" href="index.php?action=vote&id=<?php echo $idea->html_id_idea()?>"> Voter</a>	
 			</div>
