@@ -40,7 +40,7 @@ class Db
         return new Idea($row->id_idea, $row->title, $row->text, $row->status, $row->date_submitted, $row->date_accepted, $row->date_refused, $row->date_closed, $row->id_member);
     }
 
-    public function select_ideas_all($limit="",$order="",$submitted="",$accepted="",$refused="",$closed="") {
+    public function select_ideas_all($limit="", $display="", $order="",$submitted="",$accepted="",$refused="",$closed="") {
         $queryWhereStatus = "";
         $sorts = array("date"=>"ideas.date_submitted", "vote"=>"votes_count");
         $queryOrder =  ($order)?$sorts[$order]:"votes_count"; // Default order by votes_count
@@ -54,14 +54,11 @@ class Db
                     LEFT JOIN votes ON votes.id_idea = ideas.id_idea
                     '.$queryWhereStatus.'
                     GROUP BY ideas.id_idea
-                    ORDER BY '.$queryOrder.' DESC';
-        if($limit){
-            $query .= ' LIMIT :limit';
-        }
+                    ORDER BY '.$queryOrder.' DESC
+                    LIMIT :limit, :display';
         $ps = $this->_connection->prepare($query);
-        if($limit){
-            $ps->bindValue(':limit',$limit,PDO::PARAM_INT);
-        }
+        $ps->bindValue(':limit',$limit,PDO::PARAM_INT);
+        $ps->bindValue(':display',$display,PDO::PARAM_INT);
         $ps->execute();
         $table = array();
         while ($row = $ps->fetch()) {
@@ -113,6 +110,16 @@ class Db
         $ps->bindValue(':id_idea',$id_idea);
         $ps->execute();
         return $ps->execute();
+    }
+
+    public function count_ideas() {
+        $query = 'SELECT COUNT(*) AS ideas_count FROM ideas';
+        $ps = $this->_connection->prepare($query);
+        $ps->execute();
+        $row = $ps->fetch();
+        if ($ps->rowcount() == 0)
+            return null;
+        return $row->ideas_count; 
     }
     /* =====================================================================
                                         VOTES

@@ -48,5 +48,9 @@
 			</div>
 		<?php } ?>
 	</div>
+	
+	<?php for ($page = 1; $page <= $pages; $page++) { ?>
+		<a class="liens" href="index.php?page=<?php echo $page?>&form_filter=true&=<?php echo $page?>"><?php echo $page?>|</a>
+	<?php } ?>
 </div>
 

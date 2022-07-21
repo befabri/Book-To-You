@@ -28,9 +28,15 @@ class HomeController {
 			$notification = "Idée ajoutée";
 		}
 
+		$page = 1;
+		$display = 40;
+		if (!empty($_GET['page'])) {
+			$page = $_GET['page'];
+		}
+
 		// Filter the ideas to display on the main page by status
 		if (!empty($_GET['form_filter']) && !empty($_GET['display']) && !empty($_GET['sort'])) {
-			$display = $sort = "";
+			$sort = "";
 			$submitted=isset($_GET['submitted'])?"SUBMITTED":false;
 			$accepted=isset($_GET['accepted'])?"ACCEPTED":false;
 			$refused=isset($_GET['refused'])?"REFUSED":false;
@@ -39,10 +45,16 @@ class HomeController {
 				$display = $_GET['display'];
 			if ($_GET['sort'] =="date" || $_GET['sort'] =="vote")
 				$sort = $_GET['sort'];
-			$ideas = $this->_db->select_ideas_all($display,$sort,$submitted,$accepted,$refused,$closed);
+			$offset = ($page-1) * $display;
+			var_dump($offset);
+			$ideas = $this->_db->select_ideas_all($offset,$display,$sort,$submitted,$accepted,$refused,$closed);
 		} else {
-			$ideas = $this->_db->select_ideas_all();
+			$offset = ($page-1) * $display; 
+			$ideas = $this->_db->select_ideas_all($offset,$display);
 		}
+
+		$pages = $this->_db->count_ideas();
+		$pages = ceil($pages / $display);
 
 		if (!empty($ideas)) {
 			require_once(VIEWS_PATH . 'home.php');
@@ -50,6 +62,5 @@ class HomeController {
 			require_once(VIEWS_PATH . 'homeEmpty.php');
 		}
 	}
-	
 }
 ?>
