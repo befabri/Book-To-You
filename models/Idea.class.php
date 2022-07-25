@@ -1,27 +1,27 @@
 <?php
 class Idea{
 	
-	private $_id_idea;
-	private $_title;
-	private $_text;
-	private $_status;
-	private $_date_submitted;
-	private $_date_accepted;
-	private $_date_refused;
-	private $_date_closed;
-	private $_id_member;
-	private $_votes_count;
-	private $_comments_count;
+	private int $_id_idea;
+	private string $_title;
+	private string $_text;
+	private string $_status;
+	private ?DateTimeImmutable $_date_submitted;
+	private ?DateTimeImmutable $_date_accepted;
+	private ?DateTimeImmutable $_date_refused;
+	private ?DateTimeImmutable $_date_closed;
+	private int $_id_member;
+	private int $_votes_count;
+	private int $_comments_count;
 
-	public function __construct($id_idea, $title, $text, $status, $date_submitted, $date_accepted, $date_refused, $date_closed, $id_member, $votes_count="", $comments_count=""){
+	public function __construct($id_idea, $title, $text, $status, $date_submitted, $date_accepted, $date_refused, $date_closed, $id_member, $votes_count=0, $comments_count=0){
 		$this->_id_idea = $id_idea;
 		$this->_title = $title;
 		$this->_text = $text;
 		$this->_status = $status;
-		$this->_date_submitted = $date_submitted;
-		$this->_date_accepted = $date_accepted;
-		$this->_date_refused = $date_refused;
-		$this->_date_closed = $date_closed;
+		$this->_date_submitted = new DateTimeImmutable($date_submitted);
+		$this->_date_accepted = new DateTimeImmutable($date_accepted);
+		$this->_date_refused = new DateTimeImmutable($date_refused);
+		$this->_date_closed = new DateTimeImmutable($date_closed);
 		$this->_id_member = $id_member;
 		$this->_votes_count = $votes_count;
 		$this->_comments_count = $comments_count;

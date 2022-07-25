@@ -1,19 +1,19 @@
 <?php
 class Comment{
 	
-	private $id_comments;
-	private $text;
-	private $date_submitted;
-	private $deleted;
-	private $id_member;
-	private $id_idea;
-	private $username;
-	private $idea_title;
+	private int $id_comments;
+	private string $text;
+	private ?DateTimeImmutable $date_submitted;
+	private bool $deleted;
+	private int $id_member;
+	private int $id_idea;
+	private string $username;
+	private string $idea_title;
 
 	public function __construct($id_comments, $text, $date_submitted, $deleted, $id_member, $id_idea, $username="", $idea_title=""){
 		$this->_id_comments = $id_comments;
 		$this->_text = $text;
-		$this->_date_submitted = $date_submitted;
+		$this->_date_submitted = new DateTimeImmutable($date_submitted);
 		$this->_deleted = $deleted;
 		$this->_id_member = $id_member;
 		$this->_id_idea = $id_idea;

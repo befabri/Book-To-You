@@ -1,7 +1,7 @@
 <?php 
 class AdminUserController {
 
-    private $_db;
+    private Db $_db;
         
     public function __construct($db){    
         $this->_db = $db;

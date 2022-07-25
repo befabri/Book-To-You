@@ -1,7 +1,7 @@
 <?php 
 class HeaderController{
 
-    private $_db;
+    private Db $_db;
 
     public function __construct($db) {
         $this->_db = $db;

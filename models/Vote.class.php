@@ -1,10 +1,10 @@
 <?php
 class Vote{
 	
-	private $_id_member;
-	private $_id_idea;
-	private $_title;
-	private $_member;
+	private int $_id_member;
+	private int $_id_idea;
+	private string $_title;
+	private string $_member;
 
 	public function __construct($id_member, $id_idea, $title="", $member=""){
 		$this->_id_member = $id_member;

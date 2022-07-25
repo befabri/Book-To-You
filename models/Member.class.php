@@ -1,12 +1,12 @@
 <?php
 class Member{
 	
-	private $_id_member;
-	private $_username;
-	private $_email;
-	private $_password;
-	private $_active;
-	private $_privilege;
+	private int $_id_member;
+	private string $_username;
+	private string $_email;
+	private string $_password;
+	private string $_active;
+	private bool $_privilege;
 
 	public function __construct($id_member, $username, $email, $password, $active, $privilege){
 		$this->_id_member = $id_member;
@@ -74,7 +74,7 @@ class Member{
 	}
 
 	public function is_remove(){
-		return $this->active() == "0";
+		return $this->active() == 0;
 	}
 }
 ?>
