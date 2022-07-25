@@ -22,7 +22,9 @@ class AdminIdeaController {
             if ($_GET['status'] == "accepted" || $_GET['status'] == "refused"  || $_GET['status'] == "closed"  || $_GET['status'] == "submitted" ) {
                 $idea = $this->_db->select_ideas($_GET['idea']);
                 if($idea && $idea->change_status(strtoupper($_GET['status']))) {
-                    $this->_db->update_ideas_status($_GET['status'],$idea->id_idea());
+                    date_default_timezone_set('Europe/Brussels');
+			        $datetime = date("Y-m-d H:i:s");
+                    $this->_db->update_ideas_status($_GET['status'],$idea->id_idea(),$datetime);
                 }
             }
         }

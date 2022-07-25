@@ -106,11 +106,13 @@ class Db
         return $ps->execute();
     }
 
-    public function update_ideas_status($status,$id_idea) {
-        $query = 'UPDATE ideas SET status=:status WHERE id_idea=:id_idea';
+    public function update_ideas_status($status,$id_idea,$datetime) {
+        $dateStatus = array("submitted"=>"date_submitted", "accepted"=>"date_accepted", "refused"=>"date_refused","closed"=>"date_closed");
+        $query = 'UPDATE ideas SET status=:status, '.$dateStatus[$status].'=:datetime WHERE id_idea=:id_idea';
         $ps = $this->_connection->prepare($query);
         $ps->bindValue(':status',$status);
         $ps->bindValue(':id_idea',$id_idea);
+        $ps->bindValue(':datetime',$datetime);
         $ps->execute();
         return $ps->execute();
     }
