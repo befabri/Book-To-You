@@ -1,6 +1,6 @@
 <h1 class='admin-title'>Panel Admin</h1>
 <div class='admin-container'>
-    <h2>Les utilisateurs et leurs privileges</h2>
+    <h2>Les utilisateurs et leurs privilèges</h2>
     <div class='admin-table'>
         <table>
             <tr>

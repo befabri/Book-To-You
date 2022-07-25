@@ -5,8 +5,8 @@ class Member{
 	private string $_username;
 	private string $_email;
 	private string $_password;
-	private string $_active;
-	private bool $_privilege;
+	private bool $_active;
+	private string $_privilege;
 
 	public function __construct($id_member, $username, $email, $password, $active, $privilege){
 		$this->_id_member = $id_member;

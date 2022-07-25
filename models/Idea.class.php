@@ -88,19 +88,19 @@ class Idea{
 	}
 
 	public function html_date_submitted(){
-		return htmlspecialchars($this->_date_submitted);
+		return $this->_date_submitted->format('d-m-Y H:i:s');
 	}
 
 	public function html_date_accepted(){
-		return htmlspecialchars($this->_date_accepted);
+		return $this->_date_accepted->format('d-m-Y H:i:s');
 	}
 
 	public function html_date_refused(){
-		return htmlspecialchars($this->_date_refused);
+		return $this->_date_refused->format('d-m-Y H:i:s');
 	}
 
 	public function html_date_closed(){
-		return htmlspecialchars($this->_date_closed);
+		return $this->_date_closed->format('d-m-Y H:i:s');
 	}
 
 	public function html_id_member(){

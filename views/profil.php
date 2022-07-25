@@ -4,10 +4,10 @@
 	<div class='profil-content'>
 	<?php
 		foreach ($ideas as $idea) { 
-			$dateSubmitted = ($idea->html_status()=="SUBMITTED")?date_create($idea->html_date_submitted())->format('d-m-Y H:i:s'):'';
-			$dateAccepted = ($idea->html_status()=="ACCEPTED")?date_create($idea->html_date_accepted())->format('d-m-Y H:i:s'):'';
-			$dateRefused = ($idea->html_status()=="REFUSED")?date_create($idea->html_date_refused())->format('d-m-Y H:i:s'):'';
-			$dateClosed = ($idea->html_status()=="CLOSED")?date_create($idea->html_date_closed())->format('d-m-Y H:i:s'):'';
+			$dateSubmitted = ($idea->html_status()=="SUBMITTED")?$idea->html_date_submitted():'';
+			$dateAccepted = ($idea->html_status()=="ACCEPTED")?$idea->html_date_accepted():'';
+			$dateRefused = ($idea->html_status()=="REFUSED")?$idea->html_date_refused():'';
+			$dateClosed = ($idea->html_status()=="CLOSED")?$idea->html_date_closed():'';
 			echo "<div class='element'>
 					<a href='index.php?action=idea&id={$idea->html_id_idea()}'>
 						<p>Votre idée <b><i>[".STATUS[$idea->html_status()]."] {$idea->html_title()}</i></b> 
@@ -36,10 +36,9 @@
 	<?php
 		foreach ($comments as $comment) { 
 			$text = ($comment->html_deleted()==1)?"[Commentaire supprimé] <s>{$comment->html_text()}</s>":$comment->html_text();
-				$date = date_create($comment->html_date_submitted())->format('d-m-Y H:i:s');
 				echo "<div class='element'>
 						<a href='index.php?action=idea&id={$comment->html_id_idea()}'>
-						<p>Pour l'idée <b><i>{$comment->html_idea_title()}</i></b> du {$date}</p>
+						<p>Pour l'idée <b><i>{$comment->html_idea_title()}</i></b> du {$comment->html_date_submitted()}</p>
 						<p><i>{$text}</i></p>
 						</a>
 					</div>";

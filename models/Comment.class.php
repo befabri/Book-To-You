@@ -62,7 +62,7 @@ class Comment{
 	}
 	
 	public function html_date_submitted(){
-		return htmlspecialchars($this->_date_submitted);
+		return $this->_date_submitted->format('d-m-Y H:i:s');
 	}
 
 	public function html_deleted(){
