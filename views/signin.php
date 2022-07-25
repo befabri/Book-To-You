@@ -1,3 +1,4 @@
+<?php include 'notificationPopup.php';?>
 <div class="loginCadre">
     <h2>Se créer un compte</h2>
     <form action="index.php?action=signin" method="post">

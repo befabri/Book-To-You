@@ -20,7 +20,7 @@ class SigninController{
             if ($member) {
                 $notification = "L'adresse email est déjà prise";
             } elseif  ($this->_db->exists_username($_POST['username'])) {
-                $notification = 'Username existe deja';
+                $notification = 'Le pseudo est déjà pris';
             } else {
                 // Hash the password using bcrypt. Insert the form html user in the db with the password hash
                 $hash = password_hash($_POST['password'], PASSWORD_BCRYPT); 
