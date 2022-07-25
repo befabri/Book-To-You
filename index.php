@@ -18,6 +18,12 @@
 		$_GET['action'] = 'accueil';
 	}
 
+	# Log in for the demo
+	if (getenv('DEMO') == 1 && empty($_SESSION['demo_site'])) {
+		$_SESSION['demo_site'] = 1;
+		$_SESSION['user_id'] = "admin@gmail.com";
+	}
+
 	require_once(CONTROLLERS_PATH.'HeaderController.php');
 	$headerController = new HeaderController($db);
 	$headerController->run();
