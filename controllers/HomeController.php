@@ -39,7 +39,7 @@ class HomeController {
 				$display = $_GET['display'];
 			if ($_GET['sort'] =="date" || $_GET['sort'] =="vote")
 				$sort = $_GET['sort'];
-			$ideas = $this->_db->select_ideas_all($display,$sort,$submitted,$accepted,$refused,$closed);
+			$ideas = $this->_db->select_ideas_all($display,$sort,"desc",$submitted,$accepted,$refused,$closed);
 		} else {
 			$ideas = $this->_db->select_ideas_all();
 		}

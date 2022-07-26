@@ -1,11 +1,12 @@
 <?php
-	session_start();
-
 	define('VIEWS_PATH','views/');
 	define('MODELS_PATH','models/');
 	define('CONTROLLERS_PATH','controllers/');
 	define('STATUS',array('SUBMITTED'=>'Envoyé','ACCEPTED'=>'Accepté','REFUSED'=>'Refusé','CLOSED'=>'Fermé'));
-	define('MEMBER_RANK',array('admin'=>'Administrateur','member'=>'Simple utilisateur'));
+	define('MEMBER_RANK',array('admin'=>'Administrateur','member'=>'Utilisateur'));
+
+	session_start();
+
 	function loadClass($className) {
 		require_once('models/' . $className . '.class.php');
 	}
@@ -22,6 +23,12 @@
 	if (getenv('DEMO') == 1 && empty($_SESSION['demo_site'])) {
 		$_SESSION['demo_site'] = 1;
 		$_SESSION['user_id'] = "admin@gmail.com";
+	}
+
+	if (getenv('DEBUG') == 1) {
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
 	}
 
 	require_once(CONTROLLERS_PATH.'HeaderController.php');

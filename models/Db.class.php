@@ -40,10 +40,15 @@ class Db
         return new Idea($row->id_idea, $row->title, $row->text, $row->status, $row->date_submitted, $row->date_accepted, $row->date_refused, $row->date_closed, $row->id_member);
     }
 
-    public function select_ideas_all($limit="",$order="",$submitted="",$accepted="",$refused="",$closed="") {
+    public function select_ideas_all($limit="",$sort="", $order="desc", $submitted="",$accepted="",$refused="",$closed="") {
+        $sorts = array("date"=>"ideas.date_submitted", "vote"=>"votes_count", "id"=>"id_idea", "status"=>"status", "title"=>"title");
+        if ($sort != "" && !array_key_exists($sort, $sorts))
+            return null;
+        if (strtolower($order) != "asc" && strtolower($order) != "desc" ){
+            return null;
+        }
         $queryWhereStatus = "";
-        $sorts = array("date"=>"ideas.date_submitted", "vote"=>"votes_count");
-        $queryOrder =  ($order)?$sorts[$order]:"votes_count"; // Default order by votes_count
+        $queryOrder =  ($sort)?$sorts[$sort]:"votes_count"; // Default sort by votes_count
         if ($submitted || $accepted || $refused || $closed) 
             $queryWhereStatus =  "WHERE ideas.status IN ('{$submitted}', '{$accepted}', '{$refused}', '{$closed}')";
         $query = 'SELECT
@@ -54,7 +59,7 @@ class Db
                     LEFT JOIN votes ON votes.id_idea = ideas.id_idea
                     '.$queryWhereStatus.'
                     GROUP BY ideas.id_idea
-                    ORDER BY '.$queryOrder.' DESC';
+                    ORDER BY '.$queryOrder.' '.$order;
         if($limit){
             $query .= ' LIMIT :limit';
         }

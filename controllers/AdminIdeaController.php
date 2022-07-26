@@ -28,10 +28,24 @@ class AdminIdeaController {
                 }
             }
         }
-        $ideas = $this->_db->select_ideas_all(); 
+        $sort = $url = $order ="";
+        if (!empty($_GET['sort'])) {
+            if (empty($_GET['sorting'])){
+                $url ="&sorting=asc";
+                $order = "asc";
+            }
+            else{
+                $_GET['sorting'] = $_GET['sorting'] == "desc" ? "asc" : "desc";
+                $url = "&sorting=".$_GET['sorting'];
+                $order = $_GET['sorting'];
+            }
+			$sort = $_GET['sort'];
+        }
+        $ideas = $this->_db->select_ideas_all("", $sort, $order);
         require_once(VIEWS_PATH . 'adminIdea.php');
     }
-    
+
+
 }
 
 ?>

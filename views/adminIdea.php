@@ -4,11 +4,11 @@
     <div class='admin-table'>
         <table>
             <tr>
-                <th>ID</th>
-                <th>Titre</th>
-                <th>Statut</th>
-                <th>Votes</th>
-                <th>Commentaires</th>
+                <th><a href='index.php?action=admin-idea&sort=id<?php echo $url;?>'>ID</a></th>
+                <th><a href='index.php?action=admin-idea&sort=title<?php echo $url;?>'>Titre</a></th>
+                <th><a href='index.php?action=admin-idea&sort=status<?php echo $url;?>'>Statut</a></th>
+                <th><a href='index.php?action=admin-idea&sort=vote<?php echo $url;?>'>Votes</a></th>
+                <th><a href='index.php?action=admin-idea&sort=id<?php echo $url;?>'>Commentaires</a></th>
                 <th>ACTION</th>
                 <th>ACTION</th>
             </tr>
