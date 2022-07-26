@@ -4,10 +4,10 @@
     <div class='admin-table'>
         <table>
             <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
+                <th><a href='index.php?action=admin-user&sort=id'>ID</a></th>
+                <th><a href='index.php?action=admin-user&sort=username'>Username</a></th>
+                <th><a href='index.php?action=admin-user&sort=email'>Email</a></th>
+                <th><a href='index.php?action=admin-user&sort=role'>Role</a></th>
                 <th>ACTION</th>
                 <th>DESACTIVER</th>
             </tr>

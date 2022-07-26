@@ -28,24 +28,39 @@ class AdminIdeaController {
                 }
             }
         }
-        $sort = $url = $order ="";
         if (!empty($_GET['sort'])) {
-            if (empty($_GET['sorting'])){
-                $url ="&sorting=asc";
-                $order = "asc";
-            }
-            else{
-                $_GET['sorting'] = $_GET['sorting'] == "desc" ? "asc" : "desc";
-                $url = "&sorting=".$_GET['sorting'];
-                $order = $_GET['sorting'];
-            }
 			$sort = $_GET['sort'];
+            if (!empty($_SESSION['sort_order'])) {
+                if ($_SESSION['sort_order'] == "asc")
+                    $_SESSION['sort_order'] = "desc";
+                else
+                    $_SESSION['sort_order'] = "asc";
+            } else {
+                $_SESSION['sort_order'] = "asc";
+            }
+            if ($sort == "comment")
+            {
+                $ideas = $this->_db->select_ideas_all();
+                $ideas = $this->sort_comment($ideas, $_SESSION['sort_order']);
+            } else {
+                $ideas = $this->_db->select_ideas_all("", $sort, $_SESSION['sort_order']);
+            }
+        } else {
+            $ideas = $this->_db->select_ideas_all();
         }
-        $ideas = $this->_db->select_ideas_all("", $sort, $order);
         require_once(VIEWS_PATH . 'adminIdea.php');
     }
 
-
+    function sort_comment($array, $order="asc")
+    {
+        usort($array, function($a, $b) use ($order) {
+            if($order == "asc")
+                return $a->comments_count() > $b->comments_count();
+            else
+                return $a->comments_count() < $b->comments_count();
+        });
+        return $array;
+    }
 }
 
 ?>
