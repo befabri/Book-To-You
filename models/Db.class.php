@@ -272,7 +272,7 @@ class Db
         return new Member($row->id_member, $row->username, $row->email, $row->password, $row->active, $row->privilege);
     }
 
-    public function select_members_all ($sort="id", $order="asc"){
+    public function select_members_all($sort="id", $order="asc"){
         $sorts = array("active"=>"active", "email"=>"email", "id"=>"id_member", "role"=>"privilege", "username"=>"username");
         if (!array_key_exists($sort, $sorts))
             $sort = "id";
@@ -281,7 +281,7 @@ class Db
         $sort = $sorts[$sort];
         $query = 'SELECT * from members ORDER BY '.$sort.' '.$order;
         $ps = $this->_connection->prepare($query);
-        $ps->execute(array($sort, $order));
+        $ps->execute();
         $table = [];
         while ($row = $ps->fetch()) {
             $table[] = new Member($row->id_member, $row->username, $row->email, $row->password, $row->active, $row->privilege);
