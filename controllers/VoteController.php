@@ -17,7 +17,7 @@ class VoteController {
 
 		if (!empty($_GET['id'])) {
 			$idea = $this->_db->select_ideas($_GET['id']);  
-			if($idea) {
+			if ($idea) {
 				switch ($idea->html_status()) {
 					case 'CLOSED':
 						$notification = "Erreur : Les votes sont terminés";
@@ -31,9 +31,9 @@ class VoteController {
 					case 'ACCEPTED':
 						// Verify that the status of idea is accepted for voting and the user is not author of idea
 						$member = $this->_db->select_members_by_email($_SESSION['user_id']);
-						if($idea->html_id_member() != $member->html_id_member()) {
-							if (!$this->_db->exists_votes($_GET['id'],$member->html_id_member())) {
-								$this->_db->insert_votes($_GET['id'],$member->html_id_member());
+						if ($idea->html_id_member() != $member->html_id_member()) {
+							if (!$this->_db->exists_votes($_GET['id'], $member->html_id_member())) {
+								$this->_db->insert_votes($_GET['id'], $member->html_id_member());
 								$notification = "Votre vote a été ajouté";
 							} else {
 								$notification = "Erreur : Vous avez déjà voté cette idée";
@@ -50,7 +50,6 @@ class VoteController {
 		}
 		header("Location: index.php");
 		die(); 
-	
 	}
 }
 ?>

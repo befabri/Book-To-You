@@ -6,7 +6,7 @@ class LogoutController{
 		
 	public function run(){	
         // Empty the session to disconnect the user and redirect to the connection page
-        $_SESSION['user_id'] = null;
+        unset($_SESSION['user_id']);
         header("Location: index.php?action=login");
         die();
 	}

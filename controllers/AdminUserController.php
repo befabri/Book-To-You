@@ -14,22 +14,18 @@ class AdminUserController {
             die(); 
         }
         $member = $this->_db->select_members_by_email($_SESSION['user_id']);
-        if($member && !$member->is_admin()) {
+        if ($member && !$member->is_admin()) {
             header("Location: index.php?action=login");
             die(); 
         }
         $memberConnectedId = $member->id_member();
         if (!empty($_GET['active']) && !empty($_GET['user']) || !empty($_GET['privilege']) && !empty($_GET['user'])) {
             $member = $this->_db->select_members_by_email($_GET['user']);
-            if($member &&  !$member->is_remove() && $member->id_member() != $memberConnectedId) {
-                if (!empty($_GET['active']) && $_GET['active'] == "disable") {
-                    $this->_db->update_members('active',0,$member->id_member());
-                }
-                if (!empty($_GET['privilege'])) {
-                    if ($_GET['privilege'] == "admin" || $_GET['privilege'] == "member" ) {
-                        $this->_db->update_members('privilege',$_GET['privilege'],$member->id_member());
-                    } 
-                }
+            if ($member && $member->id_member() != $memberConnectedId) {
+                if (!empty($_GET['active']) && $_GET['active'] == "disable")
+                    $this->remove_member($member);
+                if (!empty($_GET['privilege']))
+                    $this->change_member_privilege($member, $_GET['privilege']);
             }
         }
         if (!empty($_GET['sort'])) {
@@ -47,6 +43,16 @@ class AdminUserController {
             $members = $this->_db->select_members_all();
         }
         require_once(VIEWS_PATH . 'adminUser.php');
+    }
+
+    private function change_member_privilege($member, $privilege){
+        if ($privilege == "admin" || $privilege == "member" )
+            $this->_db->update_members('privilege', $privilege, $member->id_member());
+    }
+
+    private function remove_member($member){
+        if (!$member->is_remove())
+            $this->_db->update_members('active', 0, $member->id_member());
     }
 }
 ?>

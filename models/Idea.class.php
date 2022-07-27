@@ -115,9 +115,16 @@ class Idea{
 		return htmlspecialchars($this->_comments_count);
 	}
 
+	public function is_valid_status($status){
+		if ($status == "accepted" || $status == "refused"  || $status == "closed"  || $status == "submitted" ) {
+            return true;
+        }
+        return false;
+	}
+
 	public function change_status($status){
-		if($this->status() != "CLOSED" && $status != "SUBMITTED" && $this->status() != $status){ 
-			if($this->status() == "SUBMITTED" && $status == "CLOSED"){
+		if($this->status() != "closed" && $status != "submitted" && $this->status() != $status){ 
+			if($this->status() == "submitted" && $status == "closed"){
 				return false;
 			}
 			return true;

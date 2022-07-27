@@ -7,26 +7,20 @@ class AdminIdeaController {
         $this->_db = $db;
     }
     
-    public function run(){    
+    public function run() {    
         if (empty($_SESSION['user_id'])) {
             header("Location: index.php?action=login");
             die(); 
         }
         $member = $this->_db->select_members_by_email($_SESSION['user_id']);
-        if($member && !$member->is_admin()) {
+        if ($member && !$member->is_admin()) {
             header("Location: index.php?action=login");
             die(); 
         }
-
         if (!empty($_GET['status']) && !empty($_GET['idea'])) {
-            if ($_GET['status'] == "accepted" || $_GET['status'] == "refused"  || $_GET['status'] == "closed"  || $_GET['status'] == "submitted" ) {
-                $idea = $this->_db->select_ideas($_GET['idea']);
-                if($idea && $idea->change_status(strtoupper($_GET['status']))) {
-                    date_default_timezone_set('Europe/Brussels');
-			        $datetime = date("Y-m-d H:i:s");
-                    $this->_db->update_ideas_status($_GET['status'],$idea->id_idea(),$datetime);
-                }
-            }
+            $idea = $this->_db->select_ideas($_GET['idea']);
+            if($idea && $idea->is_valid_status($_GET['status']))
+                $this->change_idea_status($idea, $_GET['status']);
         }
         if (!empty($_GET['sort'])) {
 			$sort = $_GET['sort'];
@@ -51,7 +45,15 @@ class AdminIdeaController {
         require_once(VIEWS_PATH . 'adminIdea.php');
     }
 
-    function sort_comment($array, $order="asc")
+    private function change_idea_status(Idea $idea, string $status) {
+        if ($idea->change_status(strtoupper($status))) {
+            date_default_timezone_set('Europe/Brussels');
+            $datetime = date("Y-m-d H:i:s");
+            $this->_db->update_ideas_status($status,$idea->id_idea(),$datetime);
+        }
+    }
+
+    private function sort_comment($array, $order="asc")
     {
         usort($array, function($a, $b) use ($order) {
             if($order == "asc")

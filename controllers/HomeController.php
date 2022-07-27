@@ -21,11 +21,11 @@ class HomeController {
 
 		// Insert the idea with the datetime in the db if receive the HTTP POST method with the form_idea, title and text attribute
 		if (!empty($_POST['form_idea']) && !empty($_POST['title']) && !empty($_POST['text'])) {
-			date_default_timezone_set('Europe/Brussels');
-			$datetime = date("Y-m-d H:i:s");
 			$member = $this->_db->select_members_by_email($_SESSION['user_id']);
-			$this->_db->insert_ideas($_POST['title'],$_POST['text'],"SUBMITTED",$datetime,$member->id_member());
-			$notification = "Idée ajoutée";
+			if($member) {
+				$this->add_idea($_POST['title'], $_POST['text'], $member->id_member());
+				$notification = "Idée ajoutée";
+			}
 		}
 
 		// Filter the ideas to display on the main page by status
@@ -50,6 +50,11 @@ class HomeController {
 			require_once(VIEWS_PATH . 'homeEmpty.php');
 		}
 	}
-	
+
+	private function add_idea($title, $text, $memberId) {
+		date_default_timezone_set('Europe/Brussels');
+		$datetime = date("Y-m-d H:i:s");
+		$this->_db->insert_ideas($title, $text, "SUBMITTED", $datetime, $memberId);
+	}
 }
 ?>
