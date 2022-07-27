@@ -21,7 +21,7 @@ class AdminUserController {
         $memberConnectedId = $member->id_member();
         if (!empty($_GET['active']) && !empty($_GET['user']) || !empty($_GET['privilege']) && !empty($_GET['user'])) {
             $member = $this->_db->select_members_by_email($_GET['user']);
-            if($member && $member->id_member() != $member->id_member()) {
+            if($member &&  !$member->is_remove() && $member->id_member() != $memberConnectedId) {
                 if (!empty($_GET['active']) && $_GET['active'] == "disable") {
                     $this->_db->update_members('active',0,$member->id_member());
                 }
