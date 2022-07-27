@@ -11,18 +11,19 @@
                 <th>ACTION</th>
                 <th>DESACTIVER</th>
             </tr>
-            <?php foreach($members as $member) {
+            <?php foreach($users as $user) {
                 echo "<tr>";
-                echo "<td>{$member->html_id_member()}</td>"; 
-                echo "<td><a href='index.php?action=profil&user={$member->html_username()}'>{$member->html_username()}</a></td>"; 
-                echo "<td><a href='index.php?action=profil&user={$member->html_username()}'>{$member->html_email()}</a></td>"; 
-                echo "<td>".MEMBER_RANK[$member->html_privilege()]."</td>"; 
-                if ($member->html_privilege()=="admin") {
-                    echo "<td><a href='index.php?action=admin-user&privilege=member&member={$member->html_email()}'><b>Mettre membre</b></a></td>";
-                } else {
-                    echo "<td><a href='index.php?action=admin-user&privilege=admin&member={$member->html_email()}'><b>Mettre administrateur</b></a></td>";
+                echo "<td>{$user->html_id_member()}</td>"; 
+                echo "<td><a href='index.php?action=profil&user={$user->html_username()}'>{$user->html_username()}</a></td>"; 
+                echo "<td><a href='index.php?action=profil&user={$user->html_username()}'>{$user->html_email()}</a></td>"; 
+                echo "<td>".MEMBER_RANK[$user->html_privilege()]."</td>";
+                if ($user->html_id_member()!=$member->html_id_member()){
+                    if ($user->html_privilege()=="admin")
+                        echo "<td><a href='index.php?action=admin-user&privilege=member&user={$user->html_email()}'><b>Mettre membre</b></a></td>";
+                    else
+                        echo "<td><a href='index.php?action=admin-user&privilege=admin&user={$user->html_email()}'><b>Mettre administrateur</b></a></td>";
                 }
-                echo ($member->html_active()==1)?"<td><a href='index.php?action=admin-user&active=disable&member={$member->html_email()}'><b>Désactiver</b></a></td>":"<td></td>";
+                echo ($user->html_active()==1 && $user->html_id_member()!=$member->html_id_member())?"<td><a href='index.php?action=admin-user&active=disable&user={$user->html_email()}'><b>Désactiver</b></a></td>":"<td></td>";
                 echo "</tr>";
             }?>
         </table>
