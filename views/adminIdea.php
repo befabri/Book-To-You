@@ -7,7 +7,7 @@
                 <th><a href='index.php?action=admin-idea&sort=id'>ID</a></th>
                 <th><a href='index.php?action=admin-idea&sort=title'>Titre</a></th>
                 <th><a href='index.php?action=admin-idea&sort=status'>Statut</a></th>
-                <th><a href='index.php?action=admin-idea&sort=vote>'>Votes</a></th>
+                <th><a href='index.php?action=admin-idea&sort=vote'>Votes</a></th>
                 <th><a href='index.php?action=admin-idea&sort=comment'>Commentaires</a></th>
                 <th>ACTION</th>
                 <th>ACTION</th>
