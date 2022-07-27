@@ -261,6 +261,17 @@ class Db
         return new Member($row->id_member, $row->username, $row->email, $row->password, $row->active, $row->privilege);
     }
 
+    public function select_members_by_username($username) {
+        $query = 'SELECT * from members WHERE username=:username';
+        $ps = $this->_connection->prepare($query);
+        $ps->bindValue(':username',$username);
+        $ps->execute();
+        $row = $ps->fetch();
+        if ($ps->rowcount() == 0)
+            return null;
+        return new Member($row->id_member, $row->username, $row->email, $row->password, $row->active, $row->privilege);
+    }
+
     public function select_members_all ($sort="id", $order="asc"){
         $sorts = array("active"=>"active", "email"=>"email", "id"=>"id_member", "role"=>"privilege", "username"=>"username");
         if (!array_key_exists($sort, $sorts))

@@ -12,7 +12,16 @@ class ProfilController {
 			header("Location: index.php?action=login");
 			die(); 
 		}
-		$member = $this->_db->select_members_by_email($_SESSION['user_id']);
+		if (!empty($_GET['user'])) {
+			$member = $this->_db->select_members_by_username($_GET['user']);
+			if(!$member) {
+				header("Location: index.php?action=profil");
+				die(); 
+			}
+		} else {
+			$member = $this->_db->select_members_by_email($_SESSION['user_id']);
+		}
+		
 		$comments = $this->_db->select_comments_all('',$member->id_member());
 		$nbComments = count($comments);
 		$ideas = $this->	_db->select_ideas_all_by_member($member->id_member());
