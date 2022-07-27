@@ -17,7 +17,7 @@
 	<h3><?php echo $commentCount;?> <?php echo ($commentCount>1) ? 'commentaires' : 'commentaire';?></h3>
 	<div id="add-comment">
 		<form method="post" action="index.php?action=idea&id=<?php echo $_GET['id'];?>">
-			<textarea name="text" rows="2" maxlength="200">Ajouter un commentaire</textarea>
+			<textarea name="text" rows="2" maxlength="700">Ajouter un commentaire</textarea>
 			<input class="button" type="submit" name="form_comment" value="Poster un commentaire">
 		</form> 
 	</div>	
