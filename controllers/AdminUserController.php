@@ -18,16 +18,16 @@ class AdminUserController {
             header("Location: index.php?action=login");
             die(); 
         }
-        
+        $memberConnectedId = $member->id_member();
         if (!empty($_GET['active']) && !empty($_GET['user']) || !empty($_GET['privilege']) && !empty($_GET['user'])) {
-            $user = $this->_db->select_members_by_email($_GET['user']);
-            if($user && $user->id_member() != $member->id_member()) {
+            $member = $this->_db->select_members_by_email($_GET['user']);
+            if($member && $member->id_member() != $member->id_member()) {
                 if (!empty($_GET['active']) && $_GET['active'] == "disable") {
-                    $this->_db->update_members('active',0,$user->id_member());
+                    $this->_db->update_members('active',0,$member->id_member());
                 }
                 if (!empty($_GET['privilege'])) {
                     if ($_GET['privilege'] == "admin" || $_GET['privilege'] == "member" ) {
-                        $this->_db->update_members('privilege',$_GET['privilege'],$user->id_member());
+                        $this->_db->update_members('privilege',$_GET['privilege'],$member->id_member());
                     } 
                 }
             }
@@ -42,9 +42,9 @@ class AdminUserController {
             } else {
                 $_SESSION['sort_order'] = "asc";
             }
-            $users = $this->_db->select_members_all($sort, $_SESSION['sort_order']);
+            $members = $this->_db->select_members_all($sort, $_SESSION['sort_order']);
         } else {
-            $users = $this->_db->select_members_all();
+            $members = $this->_db->select_members_all();
         }
         require_once(VIEWS_PATH . 'adminUser.php');
     }

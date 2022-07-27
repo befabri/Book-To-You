@@ -24,7 +24,7 @@ class ProfilController {
 		
 		$comments = $this->_db->select_comments_all('',$member->id_member());
 		$nbComments = count($comments);
-		$ideas = $this->	_db->select_ideas_all_by_member($member->id_member());
+		$ideas = $this->_db->select_ideas_all_by_member($member->id_member());
 		$nbIdeas = count($ideas);
 		$votes = $this->_db->select_votes_all_by_member($member->id_member());
 		$nbVotes = count($votes);
