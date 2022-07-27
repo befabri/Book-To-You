@@ -7,7 +7,7 @@ class Db
     private function __construct()
     {
         try {
-            $this->_connection = new PDO('mysql:host=localhost;dbname=booktoyou;charset=utf8', getenv('DATABASE_USER'), getenv('DATABASE_PASSWORD'));
+            $this->_connection = new PDO('mysql:host='.getenv("DATABASE_HOST").';dbname=booktoyou;charset=utf8', getenv("DATABASE_USER"), getenv("DATABASE_PASSWORD"));
             $this->_connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 			$this->_connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
         } 
