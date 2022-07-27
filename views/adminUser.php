@@ -14,8 +14,8 @@
             <?php foreach($members as $member) {
                 echo "<tr>";
                 echo "<td>{$member->html_id_member()}</td>"; 
-                echo "<td>{$member->html_username()}</td>"; 
-                echo "<td>{$member->html_email()}</td>"; 
+                echo "<td><a href='index.php?action=profil&user={$member->html_username()}'>{$member->html_username()}</a></td>"; 
+                echo "<td><a href='index.php?action=profil&user={$member->html_username()}'>{$member->html_email()}</a></td>"; 
                 echo "<td>".MEMBER_RANK[$member->html_privilege()]."</td>"; 
                 if ($member->html_privilege()=="admin") {
                     echo "<td><a href='index.php?action=admin-user&privilege=member&member={$member->html_email()}'><b>Mettre membre</b></a></td>";
