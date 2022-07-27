@@ -272,7 +272,7 @@ class Db
         return new Member($row->id_member, $row->username, $row->email, $row->password, $row->active, $row->privilege);
     }
 
-    public function select_members_all ($sort="id", $order="asc"){
+    public function select_members_all($sort="id", $order="asc"){
         $sorts = array("active"=>"active", "email"=>"email", "id"=>"id_member", "role"=>"privilege", "username"=>"username");
         if (!array_key_exists($sort, $sorts))
             $sort = "id";
