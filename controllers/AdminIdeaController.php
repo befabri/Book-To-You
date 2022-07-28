@@ -40,7 +40,7 @@ class AdminIdeaController {
                 $ideas = $this->_db->select_ideas_all("", $sort, $_SESSION['sort_order']);
             }
         } else {
-            $ideas = $this->_db->select_ideas_all();
+            $ideas = $this->_db->select_ideas_all("", "id", "asc");
         }
         require_once(VIEWS_PATH . 'adminIdea.php');
     }
