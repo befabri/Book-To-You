@@ -3,13 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="icon" href="favicon.png" sizes="16x16" type="image/png"> 
-		<link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/nav.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/index.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/idea.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/profil.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/admin.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/notification.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/footer.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/main.css">
 		<title>BookToYou</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	</head>

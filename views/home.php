@@ -1,6 +1,6 @@
 <?php include 'notificationPopup.php';?>
 <div class="banner">
-	<img src="<?php echo VIEWS_PATH ?>images/banner.png" alt="banner">
+	<img src="<?php echo VIEWS_PATH ?>images/banner.webp" alt="banner">
 	<div class="top">
 		<h1>Avec BookToYou </h1>
 	</div>
