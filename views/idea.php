@@ -26,7 +26,7 @@
 			$text = nl2br($comment->html_text());
 			echo "<article class='comment-user'>";
 			echo "<div class='comment-details'>";
-			echo "<p class='comment-author'><a href='index.php?action=profil&user={$comment->html_username()}'>{$comment->html_username()}</a> - {$comment->html_date_submitted()}</p>";
+			echo "<p class='comment-author'><a href='index.php?action=profil&user={$comment->html_username()}'><b>{$comment->html_username()}</b></a> - {$comment->html_date_submitted()}</p>";
 			echo ($member->html_id_member() == $comment->html_id_member() && $comment->html_deleted()==0)?"<a class='comment-delete' href='index.php?action=idea&id={$idea->html_id_idea()}&comment={$comment->html_id_comments()}&del'>supprimer</a>":"";
 			echo "</div>";
 			echo ($comment->html_deleted()==0)?"<p class='comment-text'>{$text}</p>":"<p class='comment-text'>ce commentaire a été supprimé</p>";
